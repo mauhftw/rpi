@@ -16,7 +16,7 @@ readonly TOOL_ROOT=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
 
 # Install system deps
 apt-get update \
-&& apt-get install -y
+&& apt-get install -y \
 git
 
 # Clone repo
