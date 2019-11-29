@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+    samba:
+        container_name: samba
+        image: dperson/samba:armhf
+        command: '-u "${SMB_USERNAME};${SMB_PASSWORD}" -s "download;/srv/download;yes;no;no"'
+        ports:
+            - 139:139
+            - 445:445
+        volumes:
+            - /mnt/media/transmission:/srv
+        restart: always
+
+    transmission:
+        container_name: transmission
+        image: linuxserver/transmission:arm32v7-2.94-r2-ls35
+        environment:
+            - PUID=${TRANSMISSION_PUID}
+            - PGID=${TRANSMISSION_PGID}
+            - TZ=${TRANSMISSION_TZ}
+        ports:
+            - 9091:9091
+            - 51413:51413
+            - 51413:51413/udp
+        volumes:
+            - /mnt/media/transmission/config:/config
+            - /mnt/media/transmission/download:/downloads
+            - /mnt/media/transmission/watch:/watch
+            - ./configs/transmission/settings.json:/config/settings.json
+        restart: always

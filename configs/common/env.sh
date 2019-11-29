@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# General configs
+export USERNAME=pi
+
+# DHCP Configs
+export IP_ADDRESS=192.168.1.112/24
+export ROUTERS=192.168.1.1
+export DOMAIN_NAME_SERVERS=8.8.8.8
+
+# SMB Configs
+export SMB_USERNAME=${SMB_USERNAME:-pi}
+export SMB_PASSWORD=${SMB_PASSWORD:-raspberry}
+
+# TRANSMISSION Configs
+export TRANSMISSION_RPC_PASSWORD=${TRANSMISSION_RPC_PASSWORD:-"{afbc7e51a8129df7ef3ccce3c81d32255456fc35UoJuhJdc"}
+export TRANSMISSION_RPC_USERNAME=${TRANSMISSION_RPC_USERNAME:-pi}
+export TRANMISSION_PUID=1000
+export TRANMISSION_PGID=1000
+export TRANMISSION_TZ=Americas/Argentina
