@@ -5,7 +5,10 @@
 set -e
 
 # Check if script is being run as root
-[[ $UID != 0 ]] && echo "You must run this script as root" && exit 1
+if [[ $UID != 0 ]]; then
+    echo "You must run this script as root"
+    exit 1
+fi
 
 # Set TOOL_ROOT, the location of the directory this script is housed in
 readonly TOOL_ROOT=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
