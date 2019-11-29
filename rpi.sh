@@ -19,7 +19,7 @@ apt-get update \
 && apt-get install -y git
 
 # Clone repo
-git clone git@github.com:mauhftw/rpi.git \
+git clone https://github.com/mauhftw/rpi
 
 # Setup system dependencies
 ${TOOL_ROOT}/rpi/setup.sh
