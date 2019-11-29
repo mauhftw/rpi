@@ -39,7 +39,6 @@ jq \
 iftop \
 git \
 tmux \
-envsubst \
 python3 \
 python3-pip \
 libffi-dev \
