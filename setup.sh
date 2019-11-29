@@ -27,7 +27,7 @@ source ${TOOL_ROOT}/configs/common/env.sh
 
 # Install system deps
 apt-get update \
-&& apt-get install -y
+&& apt-get install -y \
 apt-transport-https \
 ca-certificates \
 gnupg2 \
