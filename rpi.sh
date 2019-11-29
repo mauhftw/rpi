@@ -18,8 +18,10 @@ readonly TOOL_ROOT=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
 apt-get update \
 && apt-get install -y git
 
-# Clone repo
-git clone https://github.com/mauhftw/rpi.git
+# Check if rpi repo exists, clone the repo
+if find . -type d -name 'rpi' -exec rm -rf {} +; then
+    git clone https://github.com/mauhftw/rpi.git
+fi
 
 # Setup system dependencies
 ${TOOL_ROOT}/rpi/setup.sh

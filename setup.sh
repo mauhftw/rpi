@@ -31,7 +31,7 @@ apt-get update \
 apt-transport-https \
 ca-certificates \
 gnupg2 \
-software-properties-common
+software-properties-common \
 htop \
 curl \
 vim \
