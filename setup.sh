@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # This script is intended to be used to install rpi dependencies
 # and setup media services
+# TODO: Add python bin to path
+# TODO: Mount disk and add it to fstab
+# TODO: Enable SSH by default
+# TODO: Config LC_ALL
+
 
 set -e
 
@@ -14,13 +19,13 @@ fi
 readonly TOOL_ROOT=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
 
 # Set DHCP_CONFIG_FILE, the location of the directory this script is housed in
-readonly DHCP_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/system/dhcpdcd.conf
+readonly DHCP_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/system/dhcpcd.conf
 
 # Set TRANSMISSION_CONFIG_FILE, the location of the directory this script is housed in
-readonly TRANSMISSION_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/transmission/settings.tmp.json
+readonly TRANSMISSION_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/transmission/settings.json
 
 # Set TRANSMISSION_TMP_CONFIG_FILE, the location of the directory this script is housed in
-readonly TRANSMISSION_TMP_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/transmission/settings.json
+readonly TRANSMISSION_TMP_CONFIG_FILE=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )/configs/transmission/settings.tmp.json
 
 # Source common environment variables
 source ${TOOL_ROOT}/configs/common/env.sh
