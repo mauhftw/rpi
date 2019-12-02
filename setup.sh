@@ -55,8 +55,10 @@ python-backports.ssl-match-hostname \
 libssl-dev
 
 # Install pip3
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
-&& python3 get-pip.py
+(
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python3 get-pip.py
+)
 
 # Install docker
 curl -sSL https://get.docker.com | sh
