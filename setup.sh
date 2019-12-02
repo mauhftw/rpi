@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 # This script is intended to be used to install rpi dependencies
 # and setup media services
-# TODO: Add python bin to path
-# TODO: Mount disk and add it to fstab
-# TODO: Enable SSH by default
-# TODO: Config LC_ALL
-
 
 set -e
 
@@ -14,6 +9,15 @@ if [[ $UID != 0 ]]; then
     echo "You must run this script as root"
     exit 1
 fi
+
+# Set external disk name
+EXTERNAL_DISK="${EXTERNAL_DISK:-"Seagate"}"
+
+# Set locale vars
+LOCALE_VARS="LANGUAGE LC_ALL LANG LC_TYPE"
+
+# Set locale type
+LOCALE_TYPE="${LOCALE_TYPE:-"en_US.UTF-8"}"
 
 # Set TOOL_ROOT, the location of the directory this script is housed in
 readonly TOOL_ROOT=$(cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
@@ -73,5 +77,22 @@ envsubst < ${TRANSMISSION_TMP_CONFIG_FILE} > ${TRANSMISSION_CONFIG_FILE}
 service dhcpcd start \
 && systemctl enable dhcpcd
 
-# Needs restart
+# Mount Seagate external disk
+DEV=$(lsblk -o VENDOR,NAME -l | grep ${EXTERNAL_DISK} | awk '{print $2}')
+echo "/dev/${DEV} /mnt/media ext4 defaults 0 0" >> /etc/fstab
+mount -av
+
+# Add Python bin to pi's PATH
+runuser -l ${USERNAME} -c  "echo export PATH=${PATH}:~/.local/bin/ >> ~/.bashrc"
+
+# Enable SSH on boot
+update-rc.d ssh defaults
+update-rc.d ssh enable
+
+# Set locales
+for VAR in $(echo ${LOCALE_VARS}); do
+    runuser -l ${USERNAME} -c  "echo export ${VAR}=${LOCALE_TYPE}";
+done
+
+# restart system
 init 6
